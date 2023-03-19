@@ -1,6 +1,7 @@
 # PAYS - Professionals At Your Service
 
-#Details of how to use and access the website
+# Details of how to use and access the website
+
 REQUIREMENTS:
 
 Install virtual environment for python 3.8
