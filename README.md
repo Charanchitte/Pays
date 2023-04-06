@@ -12,9 +12,9 @@ pip install django(in linux)
 https://docs.djangoproject.com/en/1.8/howto/windows/(for windows)
 
 activate the vitual env
-unzip the django_auth zip file
+unzip the django_auth zip file 
 
-go to the django_auth directory 
+go to the django_auth directory in the terminal
 
 run the commands
 
