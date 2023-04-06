@@ -18,7 +18,9 @@ go to the django_auth directory
 
 run the commands
 python3 manage.py makemigrations
+
 python3 manage.py migrate
+
 python3 manage.py runserver
 
 the server will be opened in http://127.0.0.1:8000/
