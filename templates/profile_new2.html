@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>pays_newprofile</title>
+        <style>
+    *{
+    box-sizing: border-box;
+}
+*{
+    margin: 0px;
+}
+body{
+    background-color: rgba(248,241,226,255);
+}
+hr{
+    color: rgba(29,97,122,255);
+}
+.left {
+    border: 2px solid rgba(29,97,122,255) ;
+    display: none;
+    padding-right: 4em;
+    padding-left: 1em;
+    background-color: rgba(190,230,220,255);
+}
+.right {
+    height: 100%;
+}
+.top {
+    height: 70%;
+    margin: 0px;
+    padding: 2em;
+    text-align: center;
+    width: 100%;
+    background-color: rgba(190,230,220,255);
+}
+.bottom {
+    height: 30%;
+    margin: 0px;
+    padding: 1em;
+    background-color: rgba(248,241,226,255);
+}
+form{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.name{
+            text-align: center;
+            width:20%;
+            margin: 10px;
+            border: 5px solid black;
+            background-color: rgba(190,230,220,255);
+            font-size: medium;
+            border-radius: 20px;
+            padding:7px;
+
+}
+label#skill1 {
+           color:black;
+           font-size: larger;
+        }
+.skill1{
+           text-align: center;
+            width:20%;
+            margin: 10px;
+            border: 5px solid black;
+            background-color: rgba(190,230,220,255);
+            font-size: medium;
+            border-radius: 20px;
+            padding:7px;   
+}
+label#skill2 {
+           color:black;
+           font-size: larger;
+        }
+.skill2{
+           text-align: center;
+            width:20%;
+            margin: 10px;
+            border: 5px solid black;
+            background-color: rgba(190,230,220,255)rine;
+            font-size: medium;
+            border-radius: 20px;
+            padding:7px;   
+}
+label#skill3 {
+           color:black;
+           font-size: larger;
+        }
+.skill3{
+           text-align: center;
+            width:20%;
+            margin: 10px;
+            border: 5px solid black;
+            background-color: rgba(190,230,220,255)rine;
+            font-size: medium;
+            border-radius: 20px;
+            padding:7px;   
+}
+#restime{
+    text-align: center;
+            width:20%;
+            margin: 10px;
+            border: 5px solid black;
+            background-color: rgba(190,230,220,255)rine;
+            font-size: medium;
+            border-radius: 20px;
+            padding:7px;      
+}
+#ufw{
+    text-align: center;
+            width:20%;
+            margin: 10px;
+            border: 5px solid black;
+            background-color: rgba(190,230,220,255)rine;
+            font-size: medium;
+            border-radius: 20px;
+            padding:7px;   
+}
+#upfw{
+    text-align: center;
+            width:20%;
+            margin: 10px;
+            border: 5px solid black;
+            background-color: rgba(190,230,220,255)rine;
+            font-size: medium;
+            border-radius: 20px;
+            padding:7px;   
+}
+#sub{
+    text-align: center;
+            width:20%;
+            margin: 10px;
+            border: 5px solid black;
+            background-color: rgba(190,230,220,255)rine;
+            font-size: medium;
+            border-radius: 20px;
+            padding:7px;  
+}
+#email{
+    text-align: center;
+            width:20%;
+            margin: 10px;
+            border: 5px solid black;
+            background-color: rgba(190,230,220,255)rine;
+            font-size: medium;
+            border-radius: 20px;
+            padding:7px;  
+}
+}
+        </style>
+    </head>
+    <body>
+        <div class="right">
+            <div class="top">
+                <h1>"PAYS"</h1>
+                <p>PROFESSIONALS AT YOUR SERVICE</p>
+            </div>
+        <div class="bottom">
+        <form method="post" enctype="multipart/form-data">
+        <input type="text" class="name" placeholder="Please enter your name">
+        <label  for="skill1">Main Skill:</label>
+    <select class="skill1" name="skill1">
+        {% for item in skills %}
+        <option value="{{item}}">{{ item }}</option>
+        {% endfor %}
+    </select>
+    <label id="skill2" for="skill2">Secondary Skill:</label>
+    <select class="skill2" name="skill2">
+        {% for item in skills %}
+        <option value="{{item}}">{{ item }}</option>
+        {% endfor %}
+    </select>
+    <label id="skill3" for="skill3">Another Skill:</label>
+    <select class="skill3" name="skill3">
+        {% for item in skills %}
+        <option value="{{item}}">{{ item }}</option>
+        {% endfor %}
+    </select>
+    <input type="text" id="restime" name="res_time" placeholder="Please state your Avg response time">
+    <label id="ufw" for="upforwork" >Are you up for work?</label>
+    <select id="upfw" name="upforwork">
+        <option value="Yes">Yes</option>
+        <option value="No">No</option>
+    </select>
+    <label id="skill2" for="image">Please upload your image:</label>
+    <input type="file" id="image"  alt="Submit" name="image" width="48" height="48">
+</label>
+    <input type="email" id="email" name="email" placeholder="Please state your emailid for contact">
+    <button type="submit" id="sub" name="sub">Submit</button>
+    </body>
+</form>
+</div>
+</html>

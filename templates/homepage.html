@@ -1,0 +1,209 @@
+{% load static %}
+<html>
+<head>
+    <style>
+    *{
+        box-sizing: border-box;
+    }
+    *{
+        margin: 0px;
+        border: 0;
+        padding: 0;
+    }
+    body{
+        display: flex;
+        font-family: 'Flamenco' !important;
+        /*background-color: rgba(248,241,226,255)*/
+        background-image: url('{% static "public/background.jpg" %}');
+    
+    }
+    /* hr{
+        color: rgba(29,97,122,255);
+    } */
+    
+    .topImage{
+        position: absolute;
+        top: 32px;
+        right: -7px;
+        width: 270px;
+    
+    }
+    
+    .invis {
+        display: none;
+    }
+    
+    .right {
+        height: 100%;
+    }
+    .top {
+        height: 30%;
+        margin: 0px;
+        padding: 2em;
+        text-align: center;
+        width: 100%;
+        color: white;
+        font-size: 30px;
+        /*background-color: rgba(190,230,220,255);*/
+        background-image: url(' {% static "public/background.jpg" %}');
+
+    
+    }
+    
+    .top>h1{
+        font-size: 60px;
+    }
+    
+    .mid{
+        width: 100vw;
+        height: 50px;
+        background-color: white;
+        display: flex;
+        align-items: center;
+        font-size: 20px;
+    
+        justify-content: space-around;
+        /* background-color: white; */
+    }
+    .mid>p.button {
+       text-align:justify;
+       padding-right: 400px;
+    }
+    
+    .bottom {
+        height: fit-content;
+        margin: 0px;
+        padding: 1em;
+        background-color: rgba(255, 255, 255, 0.7);
+        /*opacity: 0.6;*/
+    }
+    form {
+        display: flex;
+    }
+    form input{
+        width: 100%;
+        margin: 1% 5%;
+        border-radius: 20px;
+        border-color: white;
+        height: 3em;
+        text-align: center;
+    }
+    .search{
+    width: 7%;
+        margin: 1% 5%;
+        border-radius: 20px;
+        border-color: white;
+        height: 3em;
+    }
+    .image{
+        margin: 1em 7em;
+        display: inline-block;
+        font-weight: 700;
+        border-color: white;
+        /* width: 10em; */
+    }
+    .button {
+        /* position: absolute; */
+        height: 1em;
+        /* top: 13.5em;
+        left: 5em; */
+    }
+    .button:hover {
+        cursor: pointer;
+    
+    }
+    .dashboard:hover {
+        cursor: pointer;
+        
+    }
+    .left>p {
+        padding: 20px 30px;
+        font-weight: 500 !important; 
+    }
+    .invis{
+        text-decoration: none;
+        cursor: pointer;
+        color: black;
+    }
+    </style>
+    <script>
+        const image= document.getElementsByClassName("button")
+const left = document.getElementsByClassName("invis");
+function myfunction() {
+    left[0].style.display = "block";
+    left[1].style.display = "block";
+    left[2].style.display = "block";
+    left[3].style.display = "block";
+    left[4].style.display = "block";
+    left[5].style.display = "block";
+    left[6].style.display = "block";
+    image[0].style.display = "none";
+    image[1].style.display = "none";    
+}
+function myfunct() {
+    left[0].style.display = "none";
+    left[1].style.display = "none";
+    left[2].style.display = "none";
+    left[3].style.display = "none";
+    left[4].style.display = "none";
+    left[5].style.display = "none";
+    left[6].style.display = "none";
+    image[0].style.display = "inline";
+    image[1].style.display = "inline";
+
+}
+    </script>
+</head>
+<body>
+    
+    
+    <!-- <div class="left">
+        <p class="dashboard" onclick="myfunct()"><b>Dashboard</b></p>
+        <hr width="90%">
+        <p class="profile"><b>Profile</b></p>
+        <hr  width="90%">
+        <p class="post"><b>Post</b></p>
+        <hr  width=90%>
+        <p class="agreement"><b>Agreement</b></p>
+        <hr width=90%>
+        <p class="logout"><b>Logout</b></p>
+        <hr width=90%>
+    </div> -->
+    <div class="right">
+        <div class="top">
+            <h1>"PAYS"</h1>
+            <p>PROFESSIONALS AT YOUR SERVICE</p>
+        </div>
+        <div class="mid">
+            <img class="button" onclick="myfunction()" src="{% static 'public/button1.jpg' %}" alt="">
+            <p class="button"><b>Welcome! Find the right talent for your projects</b></p>
+            <p class="invis" onclick="myfunct()">Dashboard</p> 
+            <a class="invis" href="/pays/profile/{{ myuser.user_id }}">Profile</a>
+            <a class="invis" href="/pays/post/{{ myuser.user_id }}">Post</a>
+            <a class="invis" href="/pays/inbox/{{ myuser.user_id }}">Inbox</a>
+            <a class="invis" href="/pays/agreement/{{ myuser.user_id }}">Agreement</a>
+            <a class="invis" href="/pays/chat_msg/{{ myuser.user_id }}">Chat</a>
+            <a class="invis" href="/pays/logout">Logout</a>
+        </div>
+        <div class="bottom">
+            <form action="" method="post">
+                {% csrf_token %}
+                <input type="text" placeholder="Swearch Professional or Skill" name="search">
+
+                <input class="search" type="submit" value="Search" placeholder="search">
+            </form>
+            <h1>EXPLORE TALENTS :</h1>
+            <div class="image"><img src="{% static 'public/program.png' %}" alt="" class="p_tech"><p>Programming & Tech</p></div>
+            <div class="image"><img src="{% static 'public/graphics.png' %}" alt=""><p>Graphic Design</p></div>
+            <div class="image" style="text-align: center; padding: 5px;"><img src="{% static 'public/cad2.png' %}"  height="90" alt="" class="cad"><p>CAD</p></div>
+            <div class="image" ><img src="{% static 'public/aurdino.png' %}" alt="" class="arduino"><p>Arduino</p></div>
+            <div class="image" ><img src="{% static 'public/photoshop.png' %}" alt="" class="photoshop"><p>Photoshop</p></div>
+            <div class="image" ><img src="{% static 'public/career.png' %}" alt="" class="career"><p>Career ideas</p></div>
+            <div class="image" ><img src="{% static 'public/writing.png' %}" alt="" class="writing"><p>Writing&Translation</p></div>
+            <div class="image" ><img src="{% static 'public/music.png' %}" alt="" class="music"><p>Music and Audio</p></div>
+            <div class="image" ><img src="{% static 'public/bed.png' %}" alt="" class="room_makeover"><p>Room Makeover</p></div>
+        
+        </div>
+    </div>
+</body>
+</html>

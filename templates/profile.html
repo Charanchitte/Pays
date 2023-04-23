@@ -1,0 +1,153 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Pays_profile</title>
+        <style>
+
+*{
+    margin: 0px;
+}
+body{
+    display: flex;
+   
+    background-color: rgba(248,241,226,255);
+}
+.top {
+    
+    height: 70%;
+    margin: 0px;
+    padding: 2em;
+    padding-left: 385px;
+    padding-right: 385px;
+    
+    text-align: center;
+    width: 100%;
+    background-color: rgba(190,230,220,255);
+}
+.right {
+    height: 100%;
+    
+}
+.frame{
+    display: flex;
+    min-height: fit-content;
+}
+.frame>img {
+   padding:20px;
+   padding-left: 30px;
+  
+ 
+}
+
+.frame>.info{
+    display:flex;
+    flex-direction: column;
+    width:50%;
+}
+.info{
+    font-size: x-large;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-style: italic;
+    font-weight: bold;
+}
+.name{
+    padding:30px;
+    padding-right: 100%;
+}
+.email{
+    padding:30px;
+    padding-right: 100%;
+}
+.rating{
+    padding:10px;
+    padding-left: 30px;
+    padding-right: 100%;
+}
+.mainskill{
+    padding:30px;
+    padding-left: 30px;
+    padding-right: 100%;
+}
+.bottom{
+    display:flex;
+    min-height: fit-content;
+    font-size: x-large;
+    font-style: italic;
+    font-weight: bold;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+
+}
+.bottom>.left{
+    display:flex;
+    flex-direction: column;
+    min-width: 700px;
+    padding:30px;
+}
+.bottom>.right{
+    display: flex;
+    flex-direction: column;
+    min-width: 500px;
+    padding:30px;
+}
+.skills ,.ufw, .prepro{
+    padding:30px;
+}
+.restime,.membersince,.last,.mail{
+    padding:30px;
+    padding-left: 200px;
+}
+.submit{
+    
+    text-align: center;
+    font-size: larger;
+    margin:10px;
+    border:5px solid black;
+    background-color: aquamarine ;
+    width: fit-content;
+    padding:10px;
+    border-radius: 20px;
+    text-decoration: none;
+    color:black;
+
+}
+   </style>
+
+    </head>
+ 
+    <body>
+        <div class="right">
+            <div class="top">
+                <h1>"PAYS"</h1>
+                <p>PROFESSIONALS AT YOUR SERVICE</p>
+            </div>
+            <div class="frame">
+                <br>
+                <img src="{% static 'public/human.png' %}" alt="{% static 'public/human.png' %}" width="200" height="200" >
+            <div class="info">
+            <div class="name">Name:{{ myuser.name }}</div>
+            {% block professional %}
+            {% endblock %}
+            <!-- <div class="rating">Rating:</div>
+            <div class="mainskill">Expertin:{{ myuser.professional.skills }}</div>
+            </div>
+            </div>
+            <div class="bottom">
+                <div class="right">
+                    <div class="skills">Skills:{{ myuser.professional.skills }},{{ myuser.professional.secskill }},{{ myuser.professional.thirdskill }}</div>
+                    <div class="ufw">Up for work:{{ myuser.professional.up_for_work }}</div>
+                    <div class="prepro">Previous projects:</div>
+                </div>
+                <div class="left">
+                    <div class="restime">Avg.Response time:{{ myuser.professional.response_time }}</div>
+                    <div class="membersince">Member since: {{ myuser.professional.member_since }}</div>
+                    <div class="last">Last delivary: {{ myuser.professional.Last_delivary }}</div>
+                    <div class="mail">Mail ID:{{ myuser.professional.email }}</div>
+                </div>
+            </div>
+            <a class="submit" href="/pays/update_profile"> Update Profile</a>
+        </div> -->
+
+        
+    </body>
+</html>

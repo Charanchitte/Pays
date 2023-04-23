@@ -1,0 +1,740 @@
+<!-- {% load ratings %}
+{% load static %}
+<html>
+<head>
+    <link rel="stylesheet" href="{% static 'star-ratings/css/star-ratings.css' %}">
+<script type="text/javascript" src="{% static 'star-ratings/js/dist/star-ratings.min.js' %}"></script>
+    <style>
+        *{
+    box-sizing: border-box;
+    margin: 0;
+}
+body {
+    color: white;
+    background-color: #08647c;
+}
+p{
+    margin: 1em;
+}
+.first {
+    color: black;
+    text-align: center;
+    background-color: #b8ecdc;
+    padding: 1em;
+}
+.second {
+    display: flex;
+    border-bottom: 1px solid white;
+}
+.left,.right {
+    width: 50%;
+    text-align: center;
+    padding : 1em;
+}
+.left,.right:hover {
+    cursor: pointer;
+}
+.left {
+    background-color: #08647c;
+}
+.right {
+    background-color: #08bcb4;
+}
+.form {
+    padding:20px;
+    margin: 20px;
+    
+}
+.heading {
+    color: black;
+    text-align: center;
+    background-color: #b8ecdc;
+    padding: 1em;
+}
+.left,.right {
+    width: 50%;
+    text-align: center;
+    padding : 1em;
+}
+.left:hover{
+    cursor: pointer;
+}
+.right:hover {
+    cursor: pointer;
+}
+.left {
+    background-color: #08647c;
+}
+.right {
+    background-color: #08bcb4;
+}
+.submit:hover {
+    cursor: pointer;
+
+}
+.submit{
+    background-color: #08647c;
+    padding: 0.5em;
+    border-radius: 0.5em;
+    border: 2px solid #08bcb4;
+    color: white;
+    float: right;
+    position:relative;
+    left:5em;
+    top:40px;
+    right:20px;
+
+}
+.history{
+    /* display:flex; */
+
+}
+.his{
+    text-decoration: none;
+    color:black;
+}
+.rating {
+  display: inline-block;
+  position: relative;
+  height: 50px;
+  line-height: 50px;
+  font-size: 50px;
+}
+
+.rating label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  cursor: pointer;
+}
+
+.rating label:last-child {
+  position: static;
+}
+
+.rating label:nth-child(1) {
+  z-index: 5;
+}
+
+.rating label:nth-child(2) {
+  z-index: 4;
+}
+
+.rating label:nth-child(3) {
+  z-index: 3;
+}
+
+.rating label:nth-child(4) {
+  z-index: 2;
+}
+
+.rating label:nth-child(5) {
+  z-index: 1;
+}
+
+.rating label input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+}
+
+.rating label .icon {
+  float: left;
+  color: transparent;
+}
+
+.rating label:last-child .icon {
+  color: #000;
+}
+
+.rating:not(:hover) label input:checked ~ .icon,
+.rating:hover label:hover input ~ .icon {
+  color: #09f;
+}
+
+.rating label input:focus:not(:checked) ~ .icon:last-child {
+  color: #000;
+  text-shadow: 0 0 5px #09f;
+}
+.rat{
+    display: flex;
+    justify-content: space-between;
+}
+
+    </style>
+    <script>
+        const p1=document.getElementsByClassName("form");
+        const p2=document.getElementsByClassName("history");
+        function func(){
+            p2[0].style.display="none";
+        }
+
+function myfunction() {
+    p1[0].style.display="block";
+    p2[0].style.display="none";
+}
+function myfunc(){
+    p1[0].style.display="none";
+    p2[0].style.display="block";
+
+}
+    </script>
+</head>
+<body onload="func()">
+     <div class="first"><h1>AGREEMENT</h1></div>
+     <div class="second">
+        <div class="left" onclick="myfunction()">FORM</div> 
+        <div class="right" onclick="myfunc()">HISTORY</div> 
+    </div>
+    <div class="form">
+    {% if post.professional == myuser.professional %}
+    
+    <p>Client: {{ post.client_name }}</p>
+    <p>Professional: {{ post.prof_name }}</p>
+    <div style="display: flex"><div style="margin:1em">Subject: {{ post.subject }}</div><div style="margin:1em"></div></div>
+    <p>Deadline: {{ post.Deadline }}</p>
+    <div >
+    <form method="post">
+        {% csrf_token %}
+        <label for="rs">Negotiated Amount</label>
+        <input type="number" id="rs" name="rs" placeholder="in Rs"></input>
+        <br><br>
+        
+         <input type="submit" class="submit" value="Send"> 
+    </form>
+   
+    </div>
+    {% endif %}
+    {% for item in agreements %}
+
+    {% if item.work_not %}
+    <p>Client: {{ item.post.client_name }}</p>
+    <p>Professional: {{ item.post.prof_name }}</p>
+    <div ><div style="margin:1em">Subject: {{ item.post.subject }}</div><div style="margin:1em"></div></div>
+    <p>Deadline: {{ item.post.Deadline }}</p>
+    {% if item.post.prof_name == myuser.professional.name %}
+    <form method="post">
+        {% csrf_token %}
+    <input type="radio" id="accept" value="{{ item.id }}" name="work_not">
+    <label for="accept">Work done</label> 
+    <input type="submit" class="submit" value="Send"> 
+    </form>
+    <br><br>
+      {% endif %}
+    {% endif %}
+    {% endfor %}
+    </div>
+    
+    <div class="history">
+        {% for item in agreements %}
+        <p>Client: {{ item.post.client_name }}</p>
+    <p>Professional: {{ item.post.prof_name }}</p>
+    <div ><div style="margin:1em">Subject: {{ item.post.subject }}</div><div style="margin:1em"></div></div>
+    <p>Deadline: {{ item.post.Deadline }}</p>
+    
+    {% if item.post.client.email == myuser.email %}
+    <form class="rating">
+        <div class="rat">
+        <label>
+          <input type="radio" name="stars" value="1" />
+          <span class="icon">★</span>
+        </label>
+        <label>
+          <input type="radio" name="rating" value="2" />
+          <span class="icon">★</span><span class="icon">★</span>
+        </label>
+        <label>
+          <input type="radio" name="rating" value="3" />
+          <span class="icon">★</span><span class="icon">★</span><span class="icon">★</span>   
+        </label>
+        <label>
+          <input type="radio" name="rating" value="4" />
+          <span class="icon">★</span><span class="icon">★</span><span class="icon">★</span><span class="icon">★</span>
+        </label>
+        <label>
+          <input type="radio" name="rating" value="5" />
+          <span class="icon">★</span><span class="icon">★</span><span class="icon">★</span><span class="icon">★</span><span class="icon">★</span>
+        </label>
+         <div>
+        <input  class="submit" type="submit" value="send">
+         </div>
+    </div>
+      </form>
+    {% endif %}
+
+    <br><hr>
+
+        {% endfor %}    
+    </div>
+    
+</body>
+</html>
+
+
+
+
+<!-- <!DOCTYPE html>
+<html>
+    <head></head>
+
+<div class="fourth">
+            
+
+    {% for item in posts %}
+    <br><br>
+    <p class="client" name="client">Client: {{ item.client_name }}</p>
+    <p class="client" name="professional">Professional: {{ item.prof_name }}</p>
+    <br>
+    <label for="text">Subject:</label>
+    <p id="text2" placeholder="(brief description of work)" name="work">{{ item.subject }}</p>
+    <br><br>
+    <p name="deadline">Deadline: {{ item.Deadline }} </p>
+    <br>
+    
+        
+    {% if item.professional == myuser.professional %}
+   
+    <form method="post">
+        {% csrf_token %}
+   
+        {% if item.is_selected %}
+        {% if item.accept %}
+
+    <p class="submil">Accepted</p>
+    
+    {% else %}
+    <p class="submil">Rejected</p>
+    {% endif %}
+    {% else %}
+    <input type="radio" id="accept" value="Accept" name="accept">
+    <label for="accept">Accept</label> 
+    <input type="radio" id="reject" value="Reject" name="accept">
+    <label for="reject">Reject</label>
+    
+    <input type="submit" style="float:right  ;background-color: #08647c; padding: 0.5em;
+border-radius: 0.5em;
+    border: 1px solid #08bcb4;
+    color: white;
+    float: right;
+    margin-right: 1em;" name="submit" value="Send agreement">
+    <input style="visibility: hidden;" type="text" value="{{ item.id }}" name="post_id">
+    {% endif %}
+    </form>
+    {% else %}
+    {% if item.is_selected %}
+    {% if item.accept %}
+
+    <p class="submil">Accepted</p>
+    
+    {% else %}
+    <p class="submil">Rejected</p>
+    {% endif %}
+    {% else %}
+    <p class="submil"> The professional has yet to seen the post</p>
+    {% endif %}
+    {% endif %}
+    <br>
+    <hr>
+    {% endfor %}
+
+
+
+</div>
+<div>
+    
+</div>
+
+</html> --> -->
+
+{% load static %}
+<html>
+<head>
+    <style>
+        *{
+    box-sizing: border-box;
+    margin: 0;
+}
+body {
+    /*color: white;*/
+    /*background-color: #08647c;*/
+    background-image: url('{% static "public/background.jpg" %}');
+
+}
+.first{
+                        height:80px;
+                        color: white;
+                        font-size: 70px;
+                        font-family: "Flamenco";
+                        display:flex;
+                        justify-content: space-between;
+                    }
+                     .first>.homeicon{
+                        padding-top: 10px;
+                     }
+                     .first>.pays{
+                        padding-top:5px;
+
+                     }
+
+.second {
+    display: flex;
+    border-bottom: 1px solid white;
+   justify-content: center;
+   background-color: white;
+   height: 50px;
+   align-items: center;
+}
+.left,.right {
+    width: 50%;
+    text-align: center;
+    padding : 1em;
+}
+.left,.right:hover {
+    cursor: pointer;
+}
+.left {
+    background-color: #08647c;
+}
+.third {
+    /*margin-left:-50px;*/
+                width: 100%;
+                /*border-radius: 20px;*/
+                padding: 50px;
+                height :fit-content;
+                background-color: rgba(255, 255, 255, 0.7);
+}
+.third>* {
+    font-size: 1.2em;
+    margin-bottom: 1em;
+}
+#text,#text2 {
+    width: 100%;
+    height:20%;
+    border-radius: 1em;
+    padding: 1em;
+    /*height: */
+    /*background-color: #08bcb4;*/
+    background-color: white;
+    color:black;
+}
+::placeholder{
+    text-align: center;
+    color: white;
+}
+
+.submit:hover {
+    cursor: pointer;
+
+}
+.submit{
+    background-color: #08647c;
+    padding: 0.5em;
+    border-radius: 0.5em;
+    border: 1px solid #08bcb4;
+    color: white;
+    float: right;
+}
+#submi1 {
+    background-color: #08647c;
+    padding: 0.5em;
+    border-radius: 0.5em;
+    border: 1px solid #08bcb4;
+    color: white;
+    float: right;
+    margin-right: 1em;
+}
+.submi1:hover {
+    cursor: pointer;
+
+}
+.history{
+  display: flex;
+  flex-direction: column;
+}
+/* .rating {
+  display: inline-block;
+  position: relative;
+  height: 50px;
+  line-height: 50px;
+  font-size: 50px;
+}
+
+.rating label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  cursor: pointer;
+}
+
+.rating label:last-child {
+  position: static;
+}
+
+.rating label:nth-child(1) {
+  z-index: 5;
+}
+
+.rating label:nth-child(2) {
+  z-index: 4;
+}
+
+.rating label:nth-child(3) {
+  z-index: 3;
+}
+
+.rating label:nth-child(4) {
+  z-index: 2;
+}
+
+.rating label:nth-child(5) {
+  z-index: 1;
+}
+
+.rating label input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+}
+
+.rating label .icon {
+  float: left;
+  color: transparent;
+}
+
+.rating label:last-child .icon {
+  color: #000;
+}
+
+.rating:not(:hover) label input:checked ~ .icon,
+.rating:hover label:hover input ~ .icon {
+  color: #09f;
+}
+
+.rating label input:focus:not(:checked) ~ .icon:last-child {
+  color: #000;
+  text-shadow: 0 0 5px #09f;
+} */
+.rat{
+    display: flex;
+    justify-content: space-between;
+}
+.rati{
+  display: flex;
+  justify-content: center;
+}
+txt-center {
+    text-align: center;
+}
+.hide {
+    display: none;
+}
+
+.clear {
+    float: none;
+    clear: both;
+}
+
+.rating {
+  display: flex;
+  justify-content: center;
+    width: 100px;
+    unicode-bidi: bidi-override;
+    direction: rtl;
+    text-align: center;
+    position: relative;
+}
+
+.rating > label {
+    float: right;
+    display: inline;
+    padding: 0;
+    margin: 0;
+    position: relative;
+
+    cursor: pointer;
+    color: #000;
+}
+
+.rating > label:hover,
+.rating > label:hover ~ label,
+.rating > input.radio-btn:checked ~ label {
+    color: transparent;
+}
+
+.rating > label:hover:before,
+.rating > label:hover ~ label:before,
+.rating > input.radio-btn:checked ~ label:before,
+.rating > input.radio-btn:checked ~ label:before {
+    content: "\2605";
+    position: absolute;
+    left: 0;
+    color: #FFD700;
+}
+
+.submit3{
+    width: 10rem;
+    margin: 0.5rem;
+    padding: 0.5rem 2rem;
+    border-radius: 1rem;
+    text-align: center;
+}
+/*extarea{
+    background-color: white;
+    color:grey;
+}*/
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script>
+        const p1=document.getElementsByClassName("form");
+        const p2=document.getElementsByClassName("history");
+        const p3=decument.getElementsByClassName("left");
+        const p4=document.getElementsByClassName("right");
+        function func(){
+            p2[0].style.display="none";
+            
+        }
+
+function myfunction() {
+    p1[0].style.display="block";
+    p2[0].style.display="none";
+    p3[0].style.backgroundColor="grey";
+    p4[0].style.backgroundColor="white";
+}
+function myfunc(){
+    p1[0].style.display="none";
+    p2[0].style.display="block";
+    p3[0].style.backgroundColor="white";
+    p4[0].style.backgroundColor="grey";
+
+}
+
+    </script>
+   
+</head>
+<body onload="func()">
+    <div class="first">
+        <a href="/pays/homepage/{{ myuser.user_id }}">
+         <img class="homeicon" src="{% static 'public/home_icon.png' %}" width="70" height="60"></a>
+         <p class="pays">PAYS</p>
+        </div>
+        <div class="second">
+          <div class="left" onclick="myfunction()">FORM</div> 
+          <div class="right" onclick="myfunc()">HISTORY</div> 
+        </div>
+        
+        <div class="third">
+          <div class="form">
+            {% if post.professional == myuser.professional %}
+            
+            <p>Client: {{ post.client_name }}</p>
+            <br><br>
+            <p>Professional: {{ post.prof_name }}</p>
+            <br><br>
+            <div>Subject: {{ post.subject }}</div>
+            <p>Deadline: {{ post.Deadline }}</p>
+            <div >
+            <form method="post">
+                {% csrf_token %}
+                <label for="rs">Negotiated Amount</label>
+                <input type="number" id="rs" name="rs" placeholder="in Rs"></input>
+                <br><br>
+                
+                 <input type="submit" class="submit" value="Send"> 
+            </form>
+           
+            </div>
+            {% endif %}
+            <!-- <div> If you are not seeing any posts that mea</div> -->
+            {% for item in agreements %}
+        
+            {% if item.work_not %}
+            <p>Client: {{ item.post.client_name }}</p>
+            <br>
+            <p>Professional: {{ item.post.prof_name }}</p>
+            <br>
+           <div>Subject: {{ item.post.subject }}</div>
+           <br>
+            <p>Deadline: {{ item.post.Deadline }}</p>
+            <br>
+            <div>Negotiated amount: {{ item.Negotiated_amount }}</div>
+            <br>
+            {% if item.post.prof_name == myuser.professional.name %}
+            <form method="post">
+                {% csrf_token %}
+            <input type="radio" id="accept" value="{{ item.id }}" name="work_not">
+            <input type="radio" name="rating" value="0" style="display: none;" checked >
+            <label for="accept">Work done</label> 
+            <input type="submit" class="submit" value="Send"> 
+            </form>
+            <br><br>
+            {% else %}
+            <div>Your work is being done by {{ item.post.prof_name }}</div>
+              {% endif %}
+              
+            {% endif %}
+            {% endfor %}
+            </div>
+            
+            <div class="history">
+             
+                {% for item in agreements %}
+                {% if item.work_not %}
+                {% else %}
+                <br><br>
+                <div>Client: {{ item.post.client_name }}</div>
+                <br>
+                <div>Professional: {{ item.post.prof_name }}</div>
+                <br>
+                <div>Subject: {{ item.post.subject }}</div>
+                <br>
+                <p>Deadline: {{ item.post.Deadline }}</p>
+                <br>
+                <div>Negotiated_amount: {{ item.Negotiated_amount }}</div>
+                <div style="text-align: center;">This post has been completed.</div>
+            {% if item.post.client.email == myuser.email %}
+            {% if item.rating_done %}
+             <div style="text-align: center;">Thank You for rating!</div>
+             {% else %}
+            <div style="text-align: center;">Thank you for using our website! Please take a moment to rate the work of professional.</div>
+            <br>
+            <form method="post" class="rati">
+              {% csrf_token %}
+              <input type="submit" id="class" name="work_not" value="-1" style="display: none;">
+              <div class="rati">
+                
+                <div class="rating" style="padding-left: 400px;">
+                  <input id="star5" name="rating" type="radio" value="5" class="radio-btn hide" />
+                  <label for="star5">★</label>
+                  <input id="star4" name="rating" type="radio" value="4" class="radio-btn hide" />
+                  <label for="star4">★</label>
+                  <input id="star3" name="rating" type="radio" value="3" class="radio-btn hide" />
+                  <label for="star3">★</label>
+                  <input id="star2" name="rating" type="radio" value="2" class="radio-btn hide" />
+                  <label for="star2">★</label>
+                  <input id="star1" name="rating" type="radio" value="1" class="radio-btn hide" />
+                  <label for="star1">★</label>
+                  <div class="clear"></div>
+              </div>
+            <div class="submit3" style=" padding-top:20px; padding-left: 400px;" >
+              <input type="radio" name="prof_name" style="display: none;" id="myRadio" value="{{ item.id }}" checked>
+              <input type="submit" class="submit3"  placeholder="send" value="send">
+
+            </div>
+          </div>
+              </form>
+              <p style="padding-bottom: 50px;"></p>
+              <hr>
+             {% endif %}
+              {% endif %}
+            {% endif %}
+        
+            
+               
+                {% endfor %}    
+            </div>
+</body>
+</html>

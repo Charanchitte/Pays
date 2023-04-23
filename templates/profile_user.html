@@ -1,0 +1,14 @@
+{% extends 'green_profile.html' %}
+{% block professional %}
+<div class="third">
+    <div class="top">
+      <img class="imgtop" class="human" src="{% static 'public/human_icon.png' %}" width="300" height="250" href="/pays/homepage/{{ myuser.user_id }}">
+      <div class="topinfo">
+          <p class="name">Name:</p>
+          <p class="rating">Rating:</p>
+          <p class="expert">Expert in:</p>
+          <p class="mail">Mail id:</p>
+      </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,221 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <link href='https://fonts.googleapis.com/css?family=Flamenco' rel='stylesheet'>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Anuphan:wght@200;300&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta charset="UTF-8">
+        <title>Pays_Profile</title>
+        <style>
+            *{
+                box-sizing: border-box;
+                margin: 0;
+                padding: 0;
+            }
+            body {
+
+                padding:50px;
+                padding-top:10px;
+                background-image: url('{% static "public/background.jpg" %}');
+            }
+            .first{
+                height:80px;
+                color: white;
+                font-size: 70px;
+                font-family: "Flamenco";
+                display:flex;
+                justify-content: space-between;
+            }
+             .first>.homeicon{
+                padding-top: 20px;
+                padding-bottom: 0px;
+             }
+             .first>.pays{
+                padding-top:5px;
+
+             }
+            .second{
+                height:80px;
+                background-color: rgba(255, 255, 255, 0.9);
+                justify-content: center;
+                color: black;
+                font-size: 70px;
+                text-align: center;
+                font-family: Georgia, 'Times New Roman', Times, serif;
+                border-radius: 20px 20px 0px 0px;
+            }
+            .third{
+                border-radius: 0px 0px 20px 20px;
+                height :650px;
+                background-color: rgba(255, 255, 255, 0.7);
+                justify-content: center;
+            }
+            .top{
+                display: flex;
+                justify-content: center;
+
+            }
+            .imgtop{
+                padding:40px;
+                padding-right: 100px;
+            }
+            .topinfo{
+
+
+                padding-right: 100px;
+                padding-top: 40px;
+
+            }
+            .name{
+                font-family: 'Times New Roman', Times, serif;
+                padding-bottom: 20px;
+                font-size: x-large;
+                font-weight: bolder;
+            }
+            .rating{
+                font-family: 'Times New Roman', Times, serif;
+                padding-bottom: 20px;
+                font-size: x-large;
+                font-weight: bolder;
+            }
+            .expert{
+                font-family: 'Times New Roman', Times, serif;
+                padding-bottom: 20px;
+                font-size: x-large;
+                font-weight: bolder; 
+            }
+            .mail{
+                font-family: 'Times New Roman', Times, serif;
+                padding-bottom: 20px;
+                font-size: x-large;
+                font-weight: bolder; 
+            }
+            .bottom{
+                display: flex;
+                padding-top: 50px;
+                justify-content: center;
+            }
+            .bottom_left{
+              padding-right:30px;
+              
+
+            }
+            .skills{
+                font-family: 'Times New Roman', Times, serif;
+                padding-bottom: 50px;
+                font-size: x-large;
+                font-weight: bolder;
+            }
+            .up{
+                font-family: 'Times New Roman', Times, serif;
+                padding-bottom: 50px;
+                font-size: x-large;
+                font-weight: bolder;                
+            }
+            .prev{
+                font-family: 'Times New Roman', Times, serif;
+                padding-bottom: 50px;
+                font-size: x-large;
+                font-weight: bolder;                 
+            }
+            .bottom_right{
+                padding-left: 300px;
+            }
+            .avg{
+                font-family: 'Times New Roman', Times, serif;
+                padding-bottom: 50px;
+                font-size: x-large;
+                font-weight: bolder;                  
+            }
+            .mem{
+                font-family: 'Times New Roman', Times, serif;
+                padding-bottom: 50px;
+                font-size: x-large;
+                font-weight: bolder; 
+            }
+            .last{
+                font-family: 'Times New Roman', Times, serif;
+                padding-bottom: 50px;
+                font-size: x-large;
+                font-weight: bolder; 
+            }
+            .bottom2{
+                justify-content: center;
+                padding-left: 50px;
+                padding-top: 20px;
+            }
+            .update{
+                text-align: center;
+                padding:10px;
+                width:20%;
+                background-color: white;
+                border-radius: 20px;
+                color: black;
+                text-decoration: none;
+            }
+            .rating-list li {
+          float: right;
+          color: #ddd;
+          padding: 10px 5px;
+        }
+
+        .rating-list li:hover,
+        .rating-list li:hover ~ li {
+          color: orange;
+        }
+
+        .rating-list {
+          display: inline-block;
+          list-style: none;
+        }
+        .checked {
+            color: orange;
+        }
+        </style>
+    </head>
+    <body>
+        <div class="first">
+            <a href="/pays/homepage/{{ myuser.user_id }}">
+         <img class="homeicon" src="{% static 'public/home_icon.png' %}" width="60" height="40" ></a>
+         <p class="pays">PAYS</p>
+        </div>
+        <div class="second">
+         <p class="profile">PROFILE</p>
+        </div>
+        <div class="third">
+            <div class="top">
+         
+              <img class="imgtop" class="human" src="{% static 'public/human_icon.png' %}" width="300" height="250" >
+              <div class="topinfo">
+                  <p class="name">Name:{{ prof.name }}</p>
+                  <p class="rating">Rating: 
+                    <span class="fa fa-star {% if prof.rating > 0 %} checked {% endif %}"></span>
+                    <span class="fa fa-star {% if prof.rating > 1 %} checked {% endif %}"></span>
+                    <span class="fa fa-star {% if prof.rating > 2 %} checked {% endif %}"></span>
+                    <span class="fa fa-star {% if prof.rating > 3 %} checked {% endif %}" ></span>
+                    <span class="fa fa-star {% if prof.rating > 4 %} checked {% endif %}"></span>
+                    <p>No_of_ratings: {{ prof.no_works }}</p>
+                </p>
+                  <p class="expert">Expert in:{{ prof.skills }}</p>
+                  <p class="mail">Mail id:{{ prof.email }}</p>
+              </div>
+            </div>
+            <div class="bottom">
+              <div class="bottom_left">
+                 <div class="skills">Skills            :{{ prof.skills }},{{ prof.secskill }},{{ prof.thirdskill }}</div>
+                 <div class="up">Up for work       :{{ prof.up_for_work }}</div>
+                 <!-- <div class="prev">Previous projects :{{ prof.previous_projects }}</div> -->
+              </div>
+              <div class="bottom_right">
+                 <div class="avg">Avg.Response time  :{{ prof.response_time }}</div>
+                 <div class="mem">Member since       :{{ prof.member_since }}</div>
+                 <div class="last">Last delivery      :{{ prof.Last_delivary }}</div>
+              </div>
+            </div>
+          </div>
+    </body>
+</html>

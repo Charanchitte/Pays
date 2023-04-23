@@ -1,0 +1,43 @@
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    
+    
+    <h1 id="box1">"PAYS"</h1>
+    <h2 >Login to continue</h2>
+    <style>
+        #box1{
+            height:200px;
+            width: 100%;
+            padding-top: 100px;
+        }
+        #box1{
+           
+            background: darkgreen;
+            border-radius:25px ;
+            align-content: center;
+            text-align: center;
+            font: Lucida;
+            font-weight: 1000;
+            font-size: 80px;
+            color: black;
+            
+        }
+        form{
+            align-content: center;
+        }
+
+    </style>
+</head>
+
+<body>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Log In</button>
+    </form>
+    <img></img>
+</body>
+</html>

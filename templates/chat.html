@@ -1,0 +1,133 @@
+{% load static %}
+<html>
+    <link href='https://fonts.googleapis.com/css?family=Flamenco' rel='stylesheet'>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anuphan:wght@200;300&display=swap" rel="stylesheet"> 
+<head>
+    <style>
+        *{
+    box-sizing: border-box;
+    margin: 0;
+}
+body {
+    /*color: white;*/
+    /*background-color: #08647c;*/
+    background-image: url('{% static "public/background.jpg" %}');
+
+}
+.first{
+                        height:80px;
+                        color: white;
+                        font-size: 70px;
+                        font-family: "Flamenco";
+                        display:flex;
+                        justify-content: space-between;
+                    }
+                     .first>.homeicon{
+                        padding-top: 10px;
+                     }
+                     .first>.pays{
+                        padding-top:5px;
+
+                     }
+
+.main {
+    display: flex;
+    /* justify-content: center;
+    align-items: center; */
+    flex-direction: column;
+    justify-content: space-around;
+    background-color: rgba(242, 242, 242,0.7);
+    opacity: 0.6;
+    width: 90%;
+    height: fit-content;
+    margin: 50px 5% ;
+    border-radius: 50px;
+} 
+.send{
+    text-align: end;
+    padding:20px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: large;
+    font-weight: bold;
+}
+.rec{
+    padding:20px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: large;
+    font-weight: bold;
+}
+/* form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+} */
+#prof {
+    width: 20rem;
+    margin: 0.5rem;
+    padding: 0.5rem 2rem;
+    border-radius: 1rem;
+    text-align: center;
+}
+button{
+    margin: 0.5rem;
+    padding: 0.5rem 2rem;
+    border-radius: 1rem;
+    text-align: center;
+}
+::placeholder{
+    text-align: center;
+}
+form {
+        display: flex;
+    }
+    form input{
+        width: 100%;
+        margin: 1% 5%;
+        border-radius: 20px;
+        border-color: white;
+        height: 3em;
+        text-align: center;
+    }
+/*extarea{
+    background-color: white;
+    color:grey;
+}*/
+    </style>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+   
+</head>
+<body>
+    <div class="first">
+        <a href="/pays/homepage/{{ myuser.user_id }}">
+         <img class="homeicon" src="{% static 'public/home_icon.png' %}" width="70" height="60"></a>
+         <p class="pays">PAYS</p>
+        </div>
+        <div class="main">
+            {% for item in msgs %}
+            {% if item.sender_name == myuser.name %}
+            <div  class="send" style="font-size: larger; font-weight: bolder;">{{ item.message }}</div>
+            <hr>
+            {% else %}
+            <div class="rec" style="font-size: larger; font-weight: bolder; ">{{ item.message }}</div>
+            <hr>
+            {% endif %}
+            <br>
+            {% endfor %}
+            <br>
+            <hr>
+            <form action="" method="post">
+
+                {% csrf_token %}
+                <input type="text"name="msg" placeholder="Enter your message">
+                <button style="width:10rem" type="submit" placeholder="submit">Chat</button>
+            </form>
+            {% block content %}
+            {% endblock %}
+        </div>
+      
+</body>
+</html>

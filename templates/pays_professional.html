@@ -1,0 +1,37 @@
+{% extends 'green_profile.html' %}
+{% load static %}
+{% block content %}
+<style>
+    .checked {
+            color: orange;
+        }
+</style>
+<div class="third">
+    <div class="top">
+ 
+      <img class="imgtop" class="human" src="{% static 'public/human_icon.png' %}" width="300" height="250" >
+      <div class="topinfo">
+          <p class="name">Name:{{ myuser.professional.name }}</p>
+          <p class="rating">Rating: {{ myuser.professional.rating }}(No_of_ratings: {{ myuser.professional.no_works }}) </p>
+          <p class="expert">Expert in:{{ myuser.professional.skills }}</p>
+          <p class="mail">Mail id:{{ myuser.professional.email }}</p>
+      </div>
+    </div>
+    <div class="bottom">
+      <div class="bottom_left">
+         <div class="skills">Skills            :{{ myuser.professional.skills }},{{ myuser.professional.secskill }},{{ myuser.professional.thirdskill }}</div>
+         <div class="up">Up for work       :{{ myuser.professional.up_for_work }}</div>
+         <!-- <div class="prev">Previous projects :{{ myuser.professional.previous_projects }}</div> -->
+      </div>
+      <div class="bottom_right">
+         <div class="avg">Avg.Response time  :{{ myuser.professional.response_time }}</div>
+         <div class="mem">Member since       :{{ myuser.professional.member_since }}</div>
+         <div class="last">Last delivery      :{{ myuser.professional.Last_delivary }}</div>
+      </div>
+    </div>
+    <div class="bottom2">
+      <a class="update" href="/pays/update_profile/{{ myuser.user_id }}">Update your profile</a>
+    </div>
+  </div>
+
+{% endblock %}

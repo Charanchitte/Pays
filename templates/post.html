@@ -1,0 +1,184 @@
+{% load static %}
+<html>
+<head>
+    <style>
+        *{
+    box-sizing: border-box;
+    margin: 0;
+}
+body {
+    /*color: white;*/
+    /*background-color: #08647c;*/
+    background-image: url('{% static "public/background.jpg" %}');
+
+}
+.first{
+                        height:80px;
+                        color: white;
+                        font-size: 70px;
+                        font-family: "Flamenco";
+                        display:flex;
+                        justify-content: space-between;
+                    }
+                     .first>.homeicon{
+                        padding-top: 10px;
+                     }
+                     .first>.pays{
+                        padding-top:5px;
+
+                     }
+
+.second {
+    display: flex;
+    border-bottom: 1px solid white;
+   justify-content: center;
+   background-color: white;
+   height: 50px;
+   align-items: center;
+}
+.left,.right {
+    width: 50%;
+    text-align: center;
+    padding : 1em;
+}
+.left,.right:hover {
+    cursor: pointer;
+}
+.left {
+    background-color: #08647c;
+}
+.third {
+    /*margin-left:-50px;*/
+                width: 100vw;
+                /*border-radius: 20px;*/
+                padding: 20px;
+                height :80%;
+                background-color: rgba(255, 255, 255, 0.7);
+}
+.third>* {
+    font-size: 1.2em;
+    margin-bottom: 1em;
+}
+#text,#text2 {
+    width: 100%;
+    height:20%;
+    border-radius: 1em;
+    padding: 1em;
+    /*height: */
+    /*background-color: #08bcb4;*/
+    background-color: white;
+    color:black;
+}
+::placeholder{
+    text-align: center;
+    color: white;
+}
+
+.submit:hover {
+    cursor: pointer;
+
+}
+.submit{
+    background-color: #08647c;
+    padding: 0.5em;
+    border-radius: 0.5em;
+    border: 1px solid #08bcb4;
+    color: white;
+    float: right;
+}
+#submi1 {
+    background-color: #08647c;
+    padding: 0.5em;
+    border-radius: 0.5em;
+    border: 1px solid #08bcb4;
+    color: white;
+    float: right;
+    margin-right: 1em;
+}
+.submi1:hover {
+    cursor: pointer;
+
+}
+
+/*extarea{
+    background-color: white;
+    color:grey;
+}*/
+    </style>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script>
+   
+const third=document.getElementsByClassName("third");
+const fourth=document.getElementsByClassName("fourth");
+function func(){
+fourth[0].style.display="none";
+}
+function myfun() {
+
+    third[0].style.display="block";
+    fourth[0].style.display="none";
+}
+function myfunction() {
+
+    third[0].style.display="none";
+    fourth[0].style.display="block";
+}
+
+    </script>
+   
+</head>
+<body onload="func()">
+    <div class="first">
+        <a href="/pays/homepage/{{ myuser.user_id }}">
+         <img class="homeicon" src="{% static 'public/home_icon.png' %}" width="70" height="60"></a>
+         <p class="pays">PAYS</p>
+        </div>
+        <div class="second"><h1>POST</h1></div>
+        
+        <div class="third">
+            <p>New Post</p> 
+            <form action="" method="post">
+                {% csrf_token %}
+                <label for="profe">Professional:</label>
+                 <select id="profe" name="prof",>
+                    {% for item in all_prof %}
+                    <option value="{{item.name}}">{{ item.name }}</option>
+                    {% endfor %}
+                </select>
+                <br><br>
+                <label for="pro_name" >Project_name or Work_name</label>
+                <input type="text" name="pro_name" placeholder="Please enter your project or work name">
+                <br><br>
+                <label for="text">Subject:</label>
+                <textarea id="text" placeholder="(brief description of work)" name="work"></textarea>
+                
+                <br><br>
+                <p>Deadline:
+                <input type="date" class="deadline" value="{{ post.date|date:'Y-m-d' }}" name="deadline">
+                <script language="javascript">
+                    $(function(){
+    var dtToday = new Date();
+
+    var month = dtToday.getMonth() + 1;
+    var day = dtToday.getDate();
+    var year = dtToday.getFullYear();
+    if(month < 10)
+        month = '0' + month.toString();
+    if(day < 10)
+        day = '0' + day.toString();
+
+    var minDate= year + '-' + month + '-' + day;
+
+    $('#txtDate').attr('min', minDate);
+});
+
+                </script>
+                </p>
+                <br><br>
+                <input type="submit" class="submit" value="Send" name="send">
+             
+        </div>
+       
+      
+</body>
+</html>

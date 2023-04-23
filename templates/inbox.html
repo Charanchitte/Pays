@@ -1,0 +1,275 @@
+<!-- <!DOCTYPE html>
+<html>
+    <head></head>
+
+<div class="fourth">
+            
+
+    {% for item in posts %}
+    <br><br>
+    <p class="client" name="client">Client: {{ item.client_name }}</p>
+    <p class="client" name="professional">Professional: {{ item.prof_name }}</p>
+    <br>
+    <label for="text">Subject:</label>
+    <p id="text2" placeholder="(brief description of work)" name="work">{{ item.subject }}</p>
+    <br><br>
+    <p name="deadline">Deadline: {{ item.Deadline }} </p>
+    <br>
+    
+        
+    {% if item.professional == myuser.professional %}
+   
+    <form method="post">
+        {% csrf_token %}
+   
+        {% if item.is_selected %}
+        {% if item.accept %}
+
+    <p class="submil">Accepted</p>
+    
+    {% else %}
+    <p class="submil">Rejected</p>
+    {% endif %}
+    {% else %}
+    <input type="radio" id="accept" value="Accept" name="accept">
+    <label for="accept">Accept</label> 
+    <input type="radio" id="reject" value="Reject" name="accept">
+    <label for="reject">Reject</label>
+    
+    <input type="submit" style="float:right  ;background-color: #08647c; padding: 0.5em;
+border-radius: 0.5em;
+    border: 1px solid #08bcb4;
+    color: white;
+    float: right;
+    margin-right: 1em;" name="submit" value="Send agreement">
+    <input style="visibility: hidden;" type="text" value="{{ item.id }}" name="post_id">
+    {% endif %}
+    </form>
+    {% else %}
+    {% if item.is_selected %}
+    {% if item.accept %}
+
+    <p class="submil">Accepted</p>
+    
+    {% else %}
+    <p class="submil">Rejected</p>
+    {% endif %}
+    {% else %}
+    <p class="submil"> The professional has yet to seen the post</p>
+    {% endif %}
+    {% endif %}
+    <br>
+    <hr>
+    {% endfor %}
+
+
+
+</div>
+<div>
+    
+</div>
+
+</html> -->
+
+{% load static %}
+<html>
+<head>
+    <style>
+        *{
+    box-sizing: border-box;
+    margin: 0;
+}
+body {
+    /*color: white;*/
+    /*background-color: #08647c;*/
+    background-image: url('{% static "public/background.jpg" %}');
+
+}
+.first{
+                        height:80px;
+                        color: white;
+                        font-size: 70px;
+                        font-family: "Flamenco";
+                        display:flex;
+                        justify-content: space-between;
+                    }
+                     .first>.homeicon{
+                        padding-top: 10px;
+                     }
+                     .first>.pays{
+                        padding-top:5px;
+
+                     }
+
+.second {
+    display: flex;
+    border-bottom: 1px solid white;
+   justify-content: center;
+   background-color: white;
+   height: 50px;
+   align-items: center;
+}
+.left,.right {
+    width: 50%;
+    text-align: center;
+    padding : 1em;
+}
+.left,.right:hover {
+    cursor: pointer;
+}
+.left {
+    background-color: #08647c;
+}
+.third {
+    /*margin-left:-50px;*/
+                width: 100vw;
+                /*border-radius: 20px;*/
+                padding: 20px;
+                height :fit-content;
+                background-color: rgba(255, 255, 255, 0.7);
+}
+.third>* {
+    font-size: 1.2em;
+    margin-bottom: 1em;
+}
+#text,#text2 {
+    width: 100%;
+    height:20%;
+    border-radius: 1em;
+    padding: 1em;
+    /*height: */
+    /*background-color: #08bcb4;*/
+    background-color: white;
+    color:black;
+}
+::placeholder{
+    text-align: center;
+    color: white;
+}
+
+.submit:hover {
+    cursor: pointer;
+
+}
+.submit{
+    background-color: #08647c;
+    padding: 0.5em;
+    border-radius: 0.5em;
+    border: 1px solid #08bcb4;
+    color: white;
+    float: right;
+}
+#submi1 {
+    background-color: #08647c;
+    padding: 0.5em;
+    border-radius: 0.5em;
+    border: 1px solid #08bcb4;
+    color: white;
+    float: right;
+    margin-right: 1em;
+}
+.submi1:hover {
+    cursor: pointer;
+
+}
+
+/*extarea{
+    background-color: white;
+    color:grey;
+}*/
+    </style>
+    <script>
+// const third=document.getElementsByClassName("third");
+// const fourth=document.getElementsByClassName("fourth");
+// function func(){
+// fourth[0].style.display="none";
+// }
+// function myfun() {
+
+//     third[0].style.display="block";
+//     fourth[0].style.display="none";
+// }
+// function myfunction() {
+
+//     third[0].style.display="none";
+//     fourth[0].style.display="block";
+// }
+
+    </script>
+   
+</head>
+<body>
+    <div class="first">
+        <a href="/pays/homepage/{{ myuser.user_id }}">
+         <img class="homeicon" src="{% static 'public/home_icon.png' %}" width="70" height="60"></a>
+         <p class="pays">PAYS</p>
+        </div>
+        <div class="second"><h1>INBOX</h1></div>
+        
+        <div class="third">
+            {% for item in posts %}
+            <br><br>
+            <p class="client" name="client">Client: {{ item.client_name }}</p>
+            <p class="client" name="professional">Professional: {{ item.prof_name }}</p>
+            <br>
+            <p class="client" name="pro_name">Project or Work name: {{ item.pro_name }}</p>
+            <label for="text">Subject:</label>
+            <p id="text2" placeholder="(brief description of work)" name="work">{{ item.subject }}</p>
+            <br><br>
+            <p name="deadline">Deadline: {{ item.Deadline }} </p>
+            <br>
+            
+                
+            {% if item.professional == myuser.professional %}
+           
+            <form method="post">
+                {% csrf_token %}
+           
+                {% if item.is_selected %}
+                {% if item.accept %}
+        
+            <p class="submil">Accepted</p>
+            
+            {% else %}
+            <p class="submil">Rejected</p>
+            {% endif %}
+            {% else %}
+            <input type="radio" id="accept" value="Accept" name="accept">
+            <label for="accept">Accept</label> 
+            <input type="radio" id="reject" value="Reject" name="accept">
+            <label for="reject">Reject</label>
+            
+            <input type="submit" style="float:right  ;background-color: #08647c; padding: 0.5em;
+        border-radius: 0.5em;
+            border: 1px solid #08bcb4;
+            color: white;
+            float: right;
+            margin-right: 1em;" name="submit" value="Send agreement">
+            <input style="visibility: hidden;" type="text" value="{{ item.id }}" name="post_id">
+            {% endif %}
+            </form>
+            {% else %}
+            {% if item.is_selected %}
+            {% if item.accept %}
+        
+            <p class="submil">Accepted</p>
+            
+            {% else %}
+            <p class="submil">Rejected</p>
+            {% endif %}
+            {% else %}
+            <p class="submil"> The professional has yet to seen the post</p>
+            {% endif %}
+            {% endif %}
+            <br>
+            <hr>
+            {% endfor %}
+        
+        
+            
+             
+        </div>
+       
+      
+</body>
+</html>
