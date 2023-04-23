@@ -26,7 +26,8 @@ SECRET_KEY = 'django-insecure-nuo1qhqm%nqi8l&fwxv3+l2&3-i!u)o*81=v)0z*bhsai6my81
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['charanchitte.pythonanywhere.com']
+
 
 
 # Application definition
@@ -39,8 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    
-    
+
+
 ]
 
 MIDDLEWARE = [
@@ -126,7 +127,11 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
-
+MEDIA_URL='/media/'
+MEDIA_ROOT=os.path.join(BASE_DIR,'media')
+MEDIAFILES_DIRS=[
+    os.path.join(BASE_DIR,'media')
+]
 
 
 # Default primary key field type
@@ -140,4 +145,4 @@ EMAIL_HOST='smtp.gmail.com'
 EMAIL_PORT=587
 EMAIL_USE_TLS   = True
 EMAIL_HOST_USER='paysiitk@gmail.com'
-EMAIL_HOST_PASSWORD='iafawibwrvdlfktj'
+EMAIL_HOST_PASSWORD='nofeoeeqymymqvwm'
